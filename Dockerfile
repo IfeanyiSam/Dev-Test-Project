@@ -2,16 +2,19 @@
 FROM node:14
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR ./
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
 # Install app dependencies
 RUN npm install
 
-# Copy the application code to the working directory
-COPY nodeapp.js .
+# Copy the rest of your application code to the working directory
+COPY nodeapp.js ./
 
-# Expose a port for the Node.js application 
-EXPOSE 3000
+# Expose a port for the Node.js application (if your app uses one)
+EXPOSE 8080
 
 # Define the command to start your Node.js application
-CMD ["node", "nodeapp"]
+CMD ["node", "app.js"]
