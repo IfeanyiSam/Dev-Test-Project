@@ -14,7 +14,7 @@ RUN npm install
 COPY nodeapp.js ./
 
 # Expose a port for the Node.js application (if your app uses one)
-EXPOSE 8080
+EXPOSE 3000
 
 # Define the command to start your Node.js application
-CMD ["node", "app.js"]
+CMD ["node", "nodeapp.js"]
