@@ -21,8 +21,8 @@ resource "kubectl_manifest" "appdep" {
         spec:
           containers:
             - name: nodeapp
-              image: ifeanyisam/nodeapp:v11  
+              image: ifeanyisam/nodeapp:v1.1  
               ports:
-                - containerPort: 8080  
+                - containerPort: 3000
   EOT
 }
