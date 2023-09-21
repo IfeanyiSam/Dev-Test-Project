@@ -1,6 +1,8 @@
 provider "kubectl" {
-  config_path = "desktop/kube/.kube/config"  
+  config_path = "~/.kube/config" 
 }
+   
+
 resource "kubectl_manifest" "appdep" {
   yaml_body = <<-EOT
     apiVersion: apps/v1
@@ -21,8 +23,20 @@ resource "kubectl_manifest" "appdep" {
         spec:
           containers:
             - name: nodeapp
-              image: ifeanyisam/nodeapp:v1.1  
+              image: ifeanyisam/nodeapp:v1.1
               ports:
                 - containerPort: 3000
   EOT
+}
+
+# Use a null_resource to trigger the kubectl apply operation
+resource "null_resource" "apply_manifest" {
+  triggers = {
+    kubectl_manifest_ids = kubectl_manifest.appdep.id
+  }
+
+  provisioner "local-exec" {
+    command = "kubectl apply -f nodeappdep.yml"  # Apply the Kubernetes manifest
+    interpreter = ["bash", "-c"]
+  }
 }

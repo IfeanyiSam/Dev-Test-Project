@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nodeapp
 spec:
-  replicas: 2  
+  replicas: 2
   selector:
     matchLabels:
       app: nodeapp
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nodeapp
-          image: ifeanyisam/nodeapp:v1.1 
+          image: ifeanyisam/nodeapp:v1.1
           ports:
             - containerPort: 3000
